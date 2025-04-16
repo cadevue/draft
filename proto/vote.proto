@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package vote;
+
+option go_package = "./;proto";
+
+service VoteService {
+    rpc InitiateVote(VoteRequest) returns (VoteResponse);
+}
+
+message VoteRequest {
+    int32 term = 1;
+    int32 lastLogIndex = 2;
+    int32 lastLogTerm = 3;
+    string senderIp = 4;
+    string senderPort = 7;
+}
+
+message VoteResponse {
+    int32 term = 1;
+    bool voteGranted = 2;
+}
+
+

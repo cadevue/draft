@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package membership;
+
+option go_package = "./;proto";
+
+service MembershipService {
+    rpc ApplyMembership(MembershipRequest) returns (MembershipResponse) {}
+    rpc CopyPeers(CopyPeersRequest) returns (CopyPeersResponse) {}
+    rpc CancelMembership(MembershipRequest) returns (MembershipResponse) {}
+}
+
+message MembershipRequest {
+    string requester_addr = 1;
+}
+
+message MembershipResponse {
+    string status = 1;
+    string leader_addr = 2;
+    int32 term = 3;
+}
+
+message CopyPeersRequest {
+    repeated string peers = 1;
+}
+
+message CopyPeersResponse {
+    string status = 1;
+}

@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package command;
+
+option go_package = "./;proto";
+
+service CommandService {
+    rpc Ping (PingRequest) returns (PingResponse);
+    rpc Get (GetRequest) returns (GetResponse);
+    rpc Set (SetRequest) returns (SetResponse);
+    rpc Strln (StrlnRequest) returns (StrlnResponse);
+    rpc Del (DelRequest) returns (DelResponse);
+    rpc Append (AppendRequest) returns (AppendResponse);
+    rpc RequestLog (LogRequest) returns (LogResponse);
+    rpc Switch (SwitchRequest) returns (SwitchResponse);
+}
+
+message PingRequest {}
+
+message PingResponse {
+    string message = 1;
+}
+
+message GetRequest {
+    string key = 1;
+}
+
+message GetResponse {
+    string value = 1;
+}
+
+message SetRequest {
+    string key = 1;
+    string value = 2;
+}
+
+message SetResponse {
+    string status = 1;
+}
+
+message StrlnRequest {
+    string key = 1;
+}
+
+message StrlnResponse {
+    int32 length = 1;
+}
+
+message DelRequest {
+    string key = 1;
+}
+
+message DelResponse {
+    string value = 1;
+}
+
+message AppendRequest {
+    string key = 1;
+    string value = 2;
+}
+
+message AppendResponse {
+    string status = 1;
+}
+
+message LogEntryResponse {
+    int32 term = 1;
+    int32 command = 2;
+    string key = 3;
+    string value = 4;
+}
+
+message LogResponse {
+    repeated LogEntryResponse entries = 1;
+}
+
+message LogRequest {
+    
+}
+
+message SwitchRequest {
+    string ip = 1;
+    string port = 2;
+}
+
+message SwitchResponse {
+    string status = 1;
+    string ip = 2;
+    string port = 3;
+}

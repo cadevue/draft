@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package log;
+
+option go_package = "./;proto";
+
+service LogService {
+    rpc AppendEntries(AppendEntriesRequest) returns (AppendEntriesResponse) {}
+}
+
+message LogEntry {
+    int32 term = 1;
+    int32 command = 2;
+    string key = 3;
+    string value = 4;
+}
+
+message AppendEntriesRequest {
+    int32 term = 1;
+    int32 prevLogIndex = 2;
+    int32 prevLogTerm = 3;
+    repeated LogEntry entries = 4;
+    int32 leaderCommit = 5;
+    string senderIp = 6;
+    string senderPort = 7;
+}
+
+message AppendEntriesResponse {
+    int32 term = 1;
+    bool success = 2;
+    string message = 3;
+}
